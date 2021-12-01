@@ -26,57 +26,63 @@ namespace BankHeistPartII
                 Console.WriteLine(r.Name);
             }
 
+            string CrewMember = "";
             Console.Write("Enter the name of a new crew member: ");
-            string CrewMember = Console.ReadLine();
+            CrewMember = Console.ReadLine();
 
-            Console.WriteLine(@$"
+            while (CrewMember != "")
+            {
+                Console.WriteLine(@$"
             Please Select a Specialty for {CrewMember}:
             - Hacker
             - Muscle
             - Lock Specialist
             ");
 
-            Console.Write("Enter your selection: ");
-            string OperativeSpecialist = Console.ReadLine();
+                Console.Write("Enter your selection: ");
+                string OperativeSpecialist = Console.ReadLine();
 
-            Console.Write($"Enter {CrewMember}'s Skill Level (1-100): ");
-            int OperativeSkillLevel = int.Parse(Console.ReadLine());
+                Console.Write($"Enter {CrewMember}'s Skill Level (1-100): ");
+                int OperativeSkillLevel = int.Parse(Console.ReadLine());
 
-            Console.WriteLine($"What percentage of the cut does {CrewMember} demand?");
-            Console.Write("Enter a percentage (0-100): ");
-            int cut = int.Parse(Console.ReadLine());
+                Console.WriteLine($"What percentage of the cut does {CrewMember} demand?");
+                Console.Write("Enter a percentage (0-100): ");
+                int cut = int.Parse(Console.ReadLine());
 
-            if (OperativeSpecialist == "Hacker")
-            {
-                rolodex.Add(new Hacker()
+                if (OperativeSpecialist == "Hacker")
                 {
-                    Name = CrewMember,
-                    SkillLevel = OperativeSkillLevel,
-                    PercentageCut = cut
+                    rolodex.Add(new Hacker()
+                    {
+                        Name = CrewMember,
+                        SkillLevel = OperativeSkillLevel,
+                        PercentageCut = cut
+                    }
+                    );
                 }
-                );
-            }
-            else if (OperativeSpecialist == "Muscle")
-            {
-                rolodex.Add(new Muscle()
+                else if (OperativeSpecialist == "Muscle")
                 {
-                    Name = CrewMember,
-                    SkillLevel = OperativeSkillLevel,
-                    PercentageCut = cut
-                });
-            }
-            else if (OperativeSpecialist == "Lock Specialist")
-            {
-                rolodex.Add(new LockSpecialist
+                    rolodex.Add(new Muscle()
+                    {
+                        Name = CrewMember,
+                        SkillLevel = OperativeSkillLevel,
+                        PercentageCut = cut
+                    });
+                }
+                else if (OperativeSpecialist == "Lock Specialist")
                 {
-                    Name = CrewMember,
-                    SkillLevel = OperativeSkillLevel,
-                    PercentageCut = cut
-                });
-            }
-            else
-            {
-                Console.WriteLine("Not a specialist option, try again");
+                    rolodex.Add(new LockSpecialist
+                    {
+                        Name = CrewMember,
+                        SkillLevel = OperativeSkillLevel,
+                        PercentageCut = cut
+                    });
+                }
+                else
+                {
+                    Console.WriteLine("Not a specialist option, try again");
+                }
+                Console.Write("Enter the name of a new crew member: ");
+                CrewMember = Console.ReadLine();
             }
         }
     }
