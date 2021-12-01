@@ -6,6 +6,19 @@ namespace BankHeistPartII
         public int AlarmScore { get; set; }
         public int VaultScore { get; set; }
         public int SecurityGuardScore { get; set; }
-        private bool IsSecure = false;
+        public bool IsSecure
+        {
+            get
+            {
+                if ((AlarmScore + VaultScore + SecurityGuardScore) <= 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
     }
 }
