@@ -11,16 +11,16 @@ namespace BankHeistPartII
         {
             Hacker player1 = new Hacker();
             player1.Name = "Brady";
-            player1.SkillLevel = 12;
-            player1.PercentageCut = 50;
+            player1.SkillLevel = 100;
+            player1.PercentageCut = 25;
             Muscle player2 = new Muscle();
             player2.Name = "Katie";
-            player2.SkillLevel = 32;
-            player2.PercentageCut = 36;
+            player2.SkillLevel = 100;
+            player2.PercentageCut = 25;
             LockSpecialist player3 = new LockSpecialist();
             player3.Name = "Ben";
-            player3.SkillLevel = 89;
-            player3.PercentageCut = 68;
+            player3.SkillLevel = 100;
+            player3.PercentageCut = 25;
             Hacker player4 = new Hacker();
             player4.Name = "Josh";
             player4.SkillLevel = 57;
@@ -95,7 +95,7 @@ namespace BankHeistPartII
                         PercentageCut = cut
                     });
                 }
-                else if (specialty == "Lock Specialist")
+                else if (specialty == "LockSpecialist")
                 {
                     rolodex.Add(new LockSpecialist
                     {
@@ -173,6 +173,14 @@ namespace BankHeistPartII
             if (bank1.IsSecure)
             {
                 Console.WriteLine("Bank is secure!");
+
+                int remainder = 0;
+                foreach (IRobber robber in crew)
+                {
+                    Console.WriteLine($"{robber.Name} gets {(robber.PercentageCut * .01) * bank1.CashOnHand}");
+                }
+                Console.WriteLine();
+                Console.WriteLine($"Your Take: {bank1.CashOnHand * Math.Round((double)(100 - remainder) / 100)}");
             }
             else
             {
