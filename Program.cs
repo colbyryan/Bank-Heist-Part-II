@@ -1,6 +1,7 @@
 ﻿using System;
 using BankHeistPartII.Crew;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BankHeistPartII
 {
@@ -9,11 +10,17 @@ namespace BankHeistPartII
         static void Main(string[] args)
         {
             Hacker player1 = new Hacker();
+            player1.Name = "Brady";
             Muscle player2 = new Muscle();
+            player2.Name = "Katie";
             LockSpecialist player3 = new LockSpecialist();
+            player3.Name = "Ben";
             Hacker player4 = new Hacker();
+            player4.Name = "Josh";
             Muscle player5 = new Muscle();
+            player5.Name = "Sam";
             LockSpecialist player6 = new LockSpecialist();
+            player6.Name = "Scott";
 
             List<IRobber> rolodex = new List<IRobber>
             {
@@ -84,6 +91,28 @@ namespace BankHeistPartII
                 Console.Write("Enter the name of a new crew member: ");
                 CrewMember = Console.ReadLine();
             }
+
+            Random randInt = new Random();
+
+            Bank bank1 = new Bank()
+            {
+                AlarmScore = randInt.Next(0, 100),
+                VaultScore = randInt.Next(0, 100),
+                SecurityGuardScore = randInt.Next(0, 100),
+                CashOnHand = randInt.Next(50000, 1000000)
+            };
+
+            Dictionary<string, int> systemList = new Dictionary<string, int>
+            {
+                {"Alarm", bank1.AlarmScore}, {"Vault",bank1.VaultScore}, {"Security", bank1.SecurityGuardScore}
+            };
+
+            var sortDict = from entry in systemList orderby entry.Value ascending select entry;
+
+
+            Console.WriteLine($"Least Score: {sortDict.ElementAt(0).Key}");
+            Console.WriteLine($"Most Secure: {sortDict.ElementAt(2).Key}");
+
         }
     }
 }
