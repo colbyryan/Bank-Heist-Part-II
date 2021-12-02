@@ -26,14 +26,17 @@ namespace BankHeistPartII
             {
               player1, player2, player3, player4, player5, player6
             };
-
+            Console.WriteLine();
             Console.WriteLine("Current Operatives:\n");
             foreach (IRobber r in rolodex)
             {
+                Console.Write("Crew Member: ");
                 Console.WriteLine(r.Name);
             }
 
             string CrewMember = "";
+            Console.WriteLine();
+            Console.WriteLine("-----------------------------------------");
             Console.Write("Enter the name of a new crew member: ");
             CrewMember = Console.ReadLine();
 
@@ -47,16 +50,21 @@ namespace BankHeistPartII
             ");
 
                 Console.Write("Enter your selection: ");
-                string OperativeSpecialist = Console.ReadLine();
+                string specialty = Console.ReadLine();
 
+
+                Console.WriteLine();
+                Console.WriteLine("-----------------------------------------");
                 Console.Write($"Enter {CrewMember}'s Skill Level (1-100): ");
                 int OperativeSkillLevel = int.Parse(Console.ReadLine());
 
+                Console.WriteLine();
+                Console.WriteLine("-----------------------------------------");
                 Console.WriteLine($"What percentage of the cut does {CrewMember} demand?");
                 Console.Write("Enter a percentage (0-100): ");
                 int cut = int.Parse(Console.ReadLine());
 
-                if (OperativeSpecialist == "Hacker")
+                if (specialty == "Hacker")
                 {
                     rolodex.Add(new Hacker()
                     {
@@ -66,7 +74,7 @@ namespace BankHeistPartII
                     }
                     );
                 }
-                else if (OperativeSpecialist == "Muscle")
+                else if (specialty == "Muscle")
                 {
                     rolodex.Add(new Muscle()
                     {
@@ -75,7 +83,7 @@ namespace BankHeistPartII
                         PercentageCut = cut
                     });
                 }
-                else if (OperativeSpecialist == "Lock Specialist")
+                else if (specialty == "Lock Specialist")
                 {
                     rolodex.Add(new LockSpecialist
                     {
@@ -88,6 +96,8 @@ namespace BankHeistPartII
                 {
                     Console.WriteLine("Not a specialist option, try again");
                 }
+                Console.WriteLine();
+                Console.WriteLine("-----------------------------------------");
                 Console.Write("Enter the name of a new crew member: ");
                 CrewMember = Console.ReadLine();
             }
@@ -112,6 +122,22 @@ namespace BankHeistPartII
 
             Console.WriteLine($"Least Score: {sortDict.ElementAt(0).Key}");
             Console.WriteLine($"Most Secure: {sortDict.ElementAt(2).Key}");
+            Console.WriteLine();
+            Console.WriteLine("-----------------------------");
+            Console.WriteLine();
+
+            for (int i = 0; i < rolodex.Count; i++)
+            {
+                Console.WriteLine($"{i} {rolodex[i].Name}:  {rolodex[i].SkillLevel} {rolodex[i].PercentageCut}% ");
+                Console.WriteLine($"     Specialty: {rolodex[i].GetType().ToString().Split('.')[2]}");
+                Console.WriteLine($"     Skill Level: {rolodex[i].SkillLevel}");
+                Console.WriteLine($"     Cut Percent: {rolodex[i].PercentageCut}%");
+            }
+
+            List<IRobber> crew = new List<IRobber>();
+            Console.Write("Enter the number of the operatives you want to include in the heist: ");
+            int num = int.Parse(Console.ReadLine());
+            crew.Add(rolodex[num]);
 
         }
     }
