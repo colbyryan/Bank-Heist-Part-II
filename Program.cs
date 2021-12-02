@@ -11,16 +11,28 @@ namespace BankHeistPartII
         {
             Hacker player1 = new Hacker();
             player1.Name = "Brady";
+            player1.SkillLevel = 12;
+            player1.PercentageCut = 50;
             Muscle player2 = new Muscle();
             player2.Name = "Katie";
+            player2.SkillLevel = 32;
+            player2.PercentageCut = 36;
             LockSpecialist player3 = new LockSpecialist();
             player3.Name = "Ben";
+            player3.SkillLevel = 89;
+            player3.PercentageCut = 68;
             Hacker player4 = new Hacker();
             player4.Name = "Josh";
+            player4.SkillLevel = 57;
+            player4.PercentageCut = 76;
             Muscle player5 = new Muscle();
             player5.Name = "Sam";
+            player5.SkillLevel = 90;
+            player5.PercentageCut = 80;
             LockSpecialist player6 = new LockSpecialist();
             player6.Name = "Scott";
+            player6.SkillLevel = 55;
+            player6.PercentageCut = 15;
 
             List<IRobber> rolodex = new List<IRobber>
             {
@@ -135,9 +147,21 @@ namespace BankHeistPartII
             }
 
             List<IRobber> crew = new List<IRobber>();
+
+            int num = -1;
+
             Console.Write("Enter the number of the operatives you want to include in the heist: ");
-            int num = int.Parse(Console.ReadLine());
-            crew.Add(rolodex[num]);
+            string output = Console.ReadLine();
+
+            while (output != "")
+            {
+                num = int.Parse(output);
+                Console.Write("Enter the number of the operatives you want to include in the heist: ");
+                output = Console.ReadLine();
+            }
+
+
+
 
         }
     }
