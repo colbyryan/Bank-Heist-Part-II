@@ -8,7 +8,7 @@ namespace BankHeistPartII.Crew
         public string Name { get; set; }
         public int SkillLevel { get; set; }
         public int PercentageCut { get; set; }
-        void PerformSkill(Bank bank)
+        public void PerformSkill(Bank bank)
         {
             VaultScore -= SkillLevel;
 

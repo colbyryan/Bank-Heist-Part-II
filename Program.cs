@@ -140,29 +140,44 @@ namespace BankHeistPartII
 
             for (int i = 0; i < rolodex.Count; i++)
             {
-                Console.WriteLine($"{i} {rolodex[i].Name}:  {rolodex[i].SkillLevel} {rolodex[i].PercentageCut}% ");
+                Console.WriteLine($"{i} {rolodex[i].Name} - ");
                 Console.WriteLine($"     Specialty: {rolodex[i].GetType().ToString().Split('.')[2]}");
                 Console.WriteLine($"     Skill Level: {rolodex[i].SkillLevel}");
                 Console.WriteLine($"     Cut Percent: {rolodex[i].PercentageCut}%");
             }
-
+            Console.WriteLine("-----------------------------------------------------");
             List<IRobber> crew = new List<IRobber>();
-
+            string output = "value";
             int num = -1;
-
-            Console.Write("Enter the number of the operatives you want to include in the heist: ");
-            string output = Console.ReadLine();
-
             while (output != "")
             {
-                num = int.Parse(output);
                 Console.Write("Enter the number of the operatives you want to include in the heist: ");
                 output = Console.ReadLine();
+                if (output == "") { continue; }
+                num = int.Parse(output);
+                List<IRobber> filtered = rolodex.Where(r => !crew.Contains(r) && r.PercentageCut < 100 - crew.Select(s => s.PercentageCut).Sum()).ToList();
+                if (filtered.Contains(rolodex[num]))
+                {
+                    crew.Add(rolodex[num]);
+                    Console.WriteLine("Operative successfully added!");
+                }
+                else
+                {
+                    Console.WriteLine("Operatice is already included.");
+                }
             }
-
-
-
-
+            foreach (IRobber robber in crew)
+            {
+                robber.PerformSkill(bank1);
+            };
+            if (bank1.IsSecure)
+            {
+                Console.WriteLine("Bank is secure!");
+            }
+            else
+            {
+                Console.WriteLine("Bank is not secure...");
+            }
         }
     }
 }
